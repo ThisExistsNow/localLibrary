@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 #{title}: #{user.userName}
+  
+  p #[strong userName:] 
+    a(href=user.userName.url) #{user.userName}
+  p #[strong ID:] #{user.userID}
+  p #[strong Date:] #{user.userDate}
+  
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Copies
+    
+    each val in user_instances
+      hr
+      if val.status=='Online'
+        p.text-success #{val.status}
+      else if val.status=='Offline'
+        p.text-danger #{val.status}
+      else if val.status=='Unavailable'
+        p.text-warning #{val.status} 
+      if val.status!='Unavailable'
+        a(href=val.url) #{val._id}
+ 
+    else
+      p There are no copies of this book in the library.
